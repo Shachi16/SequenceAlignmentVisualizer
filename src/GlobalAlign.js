@@ -21,7 +21,7 @@ export function globalAlign(v, w, match, mismatch, gap) {
     for (var j = 0; j < w.length; j++) {
       var max_val = Number.NEGATIVE_INFINITY;
       var dir = ORIGIN;
-      if (i == 0 && j == 0) {
+      if (i === 0 && j === 0) {
         max_val = 0;
         dir = ORIGIN;
       }
@@ -34,7 +34,7 @@ export function globalAlign(v, w, match, mismatch, gap) {
         }
       }
 
-      if (i > 0 && j > 0 && v[i] != w[j]) {
+      if (i > 0 && j > 0 && v[i] !== w[j]) {
         var temp = M[i - 1][j - 1] + mismatch;
         if (temp > max_val) {
           max_val = temp;

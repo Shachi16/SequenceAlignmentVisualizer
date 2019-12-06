@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Image, Button, Container, Card } from 'semantic-ui-react';
+import { Grid, Container } from 'semantic-ui-react';
 
 class Matrix extends React.Component {
     constructor(props){

@@ -30,7 +30,7 @@ export function localAlign(v, w, match, mismatch, gap) {
         }
       }
 
-      if (i > 0 && j > 0 && v[i] != w[j]) {
+      if (i > 0 && j > 0 && v[i] !== w[j]) {
         var temp = M[i - 1][j - 1] + mismatch;
         if (temp > max_val) {
           max_val = temp;
