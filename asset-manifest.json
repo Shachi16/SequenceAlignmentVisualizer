@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/SequenceAlignmentVisualizer/static/css/main.1dd0d46a.chunk.css",
+    "main.js": "/SequenceAlignmentVisualizer/static/js/main.acaf6364.chunk.js",
+    "main.js.map": "/SequenceAlignmentVisualizer/static/js/main.acaf6364.chunk.js.map",
+    "runtime-main.js": "/SequenceAlignmentVisualizer/static/js/runtime-main.324aaac5.js",
+    "runtime-main.js.map": "/SequenceAlignmentVisualizer/static/js/runtime-main.324aaac5.js.map",
+    "static/js/2.15a30c40.chunk.js": "/SequenceAlignmentVisualizer/static/js/2.15a30c40.chunk.js",
+    "static/js/2.15a30c40.chunk.js.map": "/SequenceAlignmentVisualizer/static/js/2.15a30c40.chunk.js.map",
+    "index.html": "/SequenceAlignmentVisualizer/index.html",
+    "precache-manifest.91d229e004bcec1642eb8d932ed2081d.js": "/SequenceAlignmentVisualizer/precache-manifest.91d229e004bcec1642eb8d932ed2081d.js",
+    "service-worker.js": "/SequenceAlignmentVisualizer/service-worker.js",
+    "static/css/main.1dd0d46a.chunk.css.map": "/SequenceAlignmentVisualizer/static/css/main.1dd0d46a.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.324aaac5.js",
+    "static/js/2.15a30c40.chunk.js",
+    "static/css/main.1dd0d46a.chunk.css",
+    "static/js/main.acaf6364.chunk.js"
+  ]
+}
