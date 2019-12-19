@@ -1,7 +1,7 @@
-const UP = (-1,0)
-const LEFT = (0, -1)
-const TOPLEFT = (-1, -1)
-const ORIGIN = (0, 0)
+const UP = [-1,0]
+const LEFT = [0, -1]
+const TOPLEFT = [-1, -1]
+const ORIGIN = [0, 0]
 
 export function globalAlign(v, w, match, mismatch, gap) {
   //Initialize variables
@@ -12,7 +12,7 @@ export function globalAlign(v, w, match, mismatch, gap) {
     pointers.push([])
     for (var j = 0; j < w.length; j++) {
       M[i].push(0);
-      pointers[i].push(ORIGIN);
+      pointers[i].push([ORIGIN]);
     }
   }
 
@@ -20,17 +20,20 @@ export function globalAlign(v, w, match, mismatch, gap) {
   for (var i = 0; i < v.length; i++) {
     for (var j = 0; j < w.length; j++) {
       var max_val = Number.NEGATIVE_INFINITY;
-      var dir = ORIGIN;
-      if (i === 0 && j === 0) {
+      var dir = [ORIGIN];
+      if (i == 0 && j == 0) {
         max_val = 0;
-        dir = ORIGIN;
+        dir = [ORIGIN];
       }
 
       if (i > 0 && j > 0 && v[i] === w[j]) {
         var temp = M[i - 1][j - 1] + match;
         if (temp > max_val) {
           max_val = temp;
-          dir = TOPLEFT;
+          dir = [TOPLEFT];
+        }
+        else if (temp == max_val) {
+            dir.push(TOPLEFT);
         }
       }
 
@@ -38,7 +41,10 @@ export function globalAlign(v, w, match, mismatch, gap) {
         var temp = M[i - 1][j - 1] + mismatch;
         if (temp > max_val) {
           max_val = temp;
-          dir = TOPLEFT;
+          dir = [TOPLEFT];
+        }
+        else if (temp == max_val) {
+            dir.push(TOPLEFT);
         }
       }
 
@@ -46,7 +52,10 @@ export function globalAlign(v, w, match, mismatch, gap) {
         var temp = M[i][j - 1] + gap
         if (temp > max_val) {
           max_val = temp;
-          dir = LEFT;
+          dir = [LEFT];
+        }
+        else if (temp == max_val) {
+            dir.push(LEFT);
         }
       }
 
@@ -54,13 +63,16 @@ export function globalAlign(v, w, match, mismatch, gap) {
         var temp = M[i - 1][j] + gap
         if (temp > max_val) {
           max_val = temp;
-          dir = UP;
+          dir = [UP];
+        }
+        else if (temp == max_val) {
+            dir.push(UP);
         }
       }
       M[i][j] = max_val;
       pointers[i][j] = dir;
     }
   }
-
-  return { M, pointers }
+  
+  return [M, pointers]
 }

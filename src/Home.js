@@ -9,6 +9,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
           matrix: [[]],
+          pointers: [[]],
           S1: '',
           S2: '',
           match: 0,
@@ -36,8 +37,9 @@ class Home extends React.Component {
       else {
         result = localAlign(s1, s2, match, mismatch, gap);
       }
-      const { M } = result;
-      this.setState({matrix: M, showMatrix: true, S1: s1, S2: s2})
+      var M = result[0];
+      var p = result[1];
+      this.setState({matrix: M, pointers: p, showMatrix: true, S1: s1, S2: s2});
     }
 
     handleChange = () => {
@@ -53,7 +55,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { matrix, S1, S2, showMatrix } = this.state;
+        const { matrix, pointers, S1, S2, showMatrix } = this.state;
         return (
           <div>
             <h1> Sequence Aligner </h1>
@@ -97,7 +99,7 @@ class Home extends React.Component {
             <div class="display">
               <Button id="btn_compute" onClick={this.handleClick}>Compute Alignment</Button>
               { showMatrix &&
-                <Matrix matrix={matrix} longS={S1.length >= S2.length ? S1 : S2} shortS={S1.length < S2.length ? S1 : S2}/>
+                <Matrix matrix={matrix} pointers={pointers} longS={S1.length >= S2.length ? S1 : S2} shortS={S1.length < S2.length ? S1 : S2}/>
               }
             </div>
           </div>
