@@ -39,7 +39,7 @@ class Home extends React.Component {
       }
       var M = result[0];
       var p = result[1];
-      this.setState({matrix: M, pointers: p, showMatrix: true, S1: s1, S2: s2});
+      this.setState({matrix: M, pointers: p, showMatrix: true, S1: s1, S2: s2, match, mismatch, gap});
     }
 
     handleChange = () => {
@@ -55,7 +55,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { matrix, pointers, S1, S2, showMatrix } = this.state;
+        const { matrix, pointers, S1, S2, showMatrix, match, mismatch, gap } = this.state;
         return (
           <div>
             <h1> Sequence Aligner </h1>
@@ -89,17 +89,17 @@ class Home extends React.Component {
               <fieldset>
                 <legend>Enter Scoring Function</legend>
                   <label for="input_match">Match</label>
-                  <input class="score_input" type="number" id="input_match"/>
+                  <input class="score_input" type="number" id="input_match" min={0}/>
                   <label for="input_mismatch">Mismatch</label>
-                  <input class="score_input" type="number" id="input_mismatch"/>
+                  <input class="score_input" type="number" id="input_mismatch" max={0}/>
                   <label for="input_gap">Gap</label>
-                  <input class="score_input" type="number" id="input_gap"/>
+                  <input class="score_input" type="number" id="input_gap" max={0}/>
               </fieldset>
             </form>
             <div class="display">
               <Button id="btn_compute" onClick={this.handleClick}>Compute Alignment</Button>
               { showMatrix &&
-                <Matrix matrix={matrix} pointers={pointers} longS={S1.length >= S2.length ? S1 : S2} shortS={S1.length < S2.length ? S1 : S2}/>
+                <Matrix matrix={matrix} pointers={pointers} match={match} mismatch={mismatch} gap={gap} longS={S1.length >= S2.length ? S1 : S2} shortS={S1.length < S2.length ? S1 : S2}/>
               }
             </div>
           </div>

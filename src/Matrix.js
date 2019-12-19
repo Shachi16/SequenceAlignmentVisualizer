@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Container, Image } from 'semantic-ui-react';
-
+import { Grid, Container, Image, Modal, Header } from 'semantic-ui-react';
+import ScoreSquare from './ScoreSquare';
 const UP = [-1,0]
 const LEFT = [0, -1]
 const TOPLEFT = [-1, -1]
@@ -15,6 +15,7 @@ class Matrix extends React.Component {
         }
     }
     renderRow = (row, rowIndex, char, pointers) => {
+      const { shortS, longS, matrix, match, mismatch, gap } = this.props;
       return (
         <Grid.Row>
         <Grid.Column>
@@ -71,8 +72,7 @@ class Matrix extends React.Component {
                 }
                 return (
                   <Grid.Column>
-                    <Image src={source} size='small' />
-                    <p style={{position: 'absolute', top: '50%', left: '50%'}}> {val} </p>
+                    <ScoreSquare img={source} score={val} row={rowIndex} col={index} mismatch={mismatch} gap={gap} match={match} char1={ shortS.split('')[rowIndex] } char2={ longS.split('')[index]} matrix={matrix}/>
                   </Grid.Column>
                 )
             }

@@ -39,3 +39,7 @@ label {
   margin-left: 40%;
   margin-right: 40%;
 }
+
+.scoreSquare:hover {
+  background-color: #B1E2D7; 
+}
