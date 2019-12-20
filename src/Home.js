@@ -41,6 +41,8 @@ class Home extends React.Component {
       var M = result[0];
       var p = result[1];
       var traceback = result[2];
+      var alignment = result[3];
+      var score = result[4];
       this.setState({matrix: M, pointers: p, traceback: traceback, showMatrix: true, S1: s1, S2: s2, match, mismatch, gap, algorithm: algorithm});
     }
 

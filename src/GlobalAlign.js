@@ -73,16 +73,19 @@ export function globalAlign(v, w, match, mismatch, gap) {
       pointers[i][j] = dir;
     }
   }
-  var traceback = traceback_global(v,w, pointers);
-  return [M, pointers, traceback]
+  var score = M[v.length - 1][w.length - 1];
+  var traceback_and_alignment = traceback_global(v,w, pointers);
+  var traceback = traceback_and_alignment[0];
+  var alignment = traceback_and_alignment[1];
+  return [M, pointers, traceback, alignment, score]
 }
 
 function traceback_global(v, w, pointers) {
     var i = v.length - 1;
     var j = w.length - 1;
 
-    var new_v = [];
-    var new_w = [];
+    var new_v = v[i];
+    var new_w = w[j];
     var traceback = [];
     while (true) {
         traceback.push([i, j]);
@@ -91,16 +94,16 @@ function traceback_global(v, w, pointers) {
         var di = d[0];
         var dj = d[1];
         if (JSON.stringify(d) == JSON.stringify(LEFT)){
-            // new_v.append('-');
-            // new_w.append(w[j-1]);
+            new_v = '-' + new_v;
+            new_w = w[j-1] + new_w;
         }
         else if (JSON.stringify(d) == JSON.stringify(UP)) {
-            // new_v.append(v[i-1]);
-            // new_w.append('-');
+            new_v = v[i-1] + new_v;
+            new_w = '-' + new_w;
         }
         else if (JSON.stringify(d) == JSON.stringify(TOPLEFT)) {
-            // new_v.append(v[i-1]);
-            // new_w.append(w[j-1]);
+            new_v = v[i-1] + new_v;
+            new_w = w[j-1] + new_w;
         }
         var i = i + di;
         var j = j + dj;
@@ -109,6 +112,6 @@ function traceback_global(v, w, pointers) {
         }
     }
     traceback.push([0,0])
-    //return ''.join(new_v[::-1])+'\n'+''.join(new_w[::-1])
-    return traceback;
+    var alignment = new_v + '\n' + new_w;
+    return [traceback, alignment];
 }

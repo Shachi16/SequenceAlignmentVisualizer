@@ -33,7 +33,7 @@ class Matrix extends React.Component {
             }
             // If this element is an integer, display arrows
             else {
-                var source;
+                var source = "arrows/NONE.png";
                 var up, left, topleft = false;
                 // Identify all of this cell's pointers
                 for (var i = 0; i < pointers[rowIndex][index].length; i++) {

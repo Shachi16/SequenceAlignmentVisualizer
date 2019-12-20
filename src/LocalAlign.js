@@ -69,6 +69,58 @@ export function localAlign(v, w, match, mismatch, gap) {
       pointers[i][j] = dir;
     }
   }
+  var init_i = 0;
+  var init_j = 0;
+  // get max score
+    var max_score = Number.NEGATIVE_INFINITY;
+    for (var i = 0; i < v.length; i++) {
+        for (var j = 0; j < w.length; j++) {
+            if (M[i][j] >= max_score) {
+                max_score = M[i][j];
+                init_i = i;
+                init_j = j;
+            }
+        }
+    }
+    var score = max_score;
+    var traceback_and_alignment = traceback_local(v, w, M, init_i, init_j, pointers);
+    var traceback = traceback_and_alignment[0];
+    var alignment = traceback_and_alignment[1];
+    return [M, pointers, traceback, alignment, score];
+}
 
-  return [M, pointers]
+function traceback_local(v, w, M, init_i, init_j, pointers) {
+    var i = init_i;
+    var j = init_j;
+
+    var new_v = v[i];
+    var new_w = w[j];
+    var traceback = [];
+    while (true) {
+        traceback.push([i, j]);
+        // Use first pointer for this cell
+        var d = pointers[i][j][0];
+        var di = d[0];
+        var dj = d[1];
+        if (JSON.stringify(d) == JSON.stringify(LEFT)){
+            new_v = '-' + new_v;
+            new_w = w[j-1] + new_w;
+        }
+        else if (JSON.stringify(d) == JSON.stringify(UP)) {
+            new_v = v[i-1] + new_v;
+            new_w = '-' + new_w;
+        }
+        else if (JSON.stringify(d) == JSON.stringify(TOPLEFT)) {
+            new_v = v[i-1] + new_v;
+            new_w = w[j-1] + new_w;
+        }
+        var i = i + di;
+        var j = j + dj;
+        if (M[i][j] == 0) {
+            break;
+        }
+    }
+    //traceback.push([0,0])
+    var alignment = new_v + '\n' + new_w;
+    return [traceback, alignment];
 }
