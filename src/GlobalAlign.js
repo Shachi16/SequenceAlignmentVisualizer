@@ -73,6 +73,42 @@ export function globalAlign(v, w, match, mismatch, gap) {
       pointers[i][j] = dir;
     }
   }
-  
-  return [M, pointers]
+  var traceback = traceback_global(v,w, pointers);
+  return [M, pointers, traceback]
+}
+
+function traceback_global(v, w, pointers) {
+    var i = v.length - 1;
+    var j = w.length - 1;
+
+    var new_v = [];
+    var new_w = [];
+    var traceback = [];
+    while (true) {
+        traceback.push([i, j]);
+        // Use first pointer for this cell
+        var d = pointers[i][j][0];
+        var di = d[0];
+        var dj = d[1];
+        if (JSON.stringify(d) == JSON.stringify(LEFT)){
+            // new_v.append('-');
+            // new_w.append(w[j-1]);
+        }
+        else if (JSON.stringify(d) == JSON.stringify(UP)) {
+            // new_v.append(v[i-1]);
+            // new_w.append('-');
+        }
+        else if (JSON.stringify(d) == JSON.stringify(TOPLEFT)) {
+            // new_v.append(v[i-1]);
+            // new_w.append(w[j-1]);
+        }
+        var i = i + di;
+        var j = j + dj;
+        if (i <= 0 && j <= 0) {
+            break;
+        }
+    }
+    traceback.push([0,0])
+    //return ''.join(new_v[::-1])+'\n'+''.join(new_w[::-1])
+    return traceback;
 }

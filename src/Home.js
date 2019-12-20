@@ -10,6 +10,7 @@ class Home extends React.Component {
         this.state = {
           matrix: [[]],
           pointers: [[]],
+          traceback: [],
           S1: '',
           S2: '',
           match: 0,
@@ -39,7 +40,8 @@ class Home extends React.Component {
       }
       var M = result[0];
       var p = result[1];
-      this.setState({matrix: M, pointers: p, showMatrix: true, S1: s1, S2: s2, match, mismatch, gap});
+      var traceback = result[2];
+      this.setState({matrix: M, pointers: p, traceback: traceback, showMatrix: true, S1: s1, S2: s2, match, mismatch, gap, algorithm: algorithm});
     }
 
     handleChange = () => {
@@ -55,7 +57,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { matrix, pointers, S1, S2, showMatrix, match, mismatch, gap } = this.state;
+        const { matrix, pointers, traceback, S1, S2, showMatrix, match, mismatch, gap, algorithm } = this.state;
         return (
           <div>
             <h1> Sequence Aligner </h1>
@@ -99,7 +101,7 @@ class Home extends React.Component {
             <div class="display">
               <Button id="btn_compute" onClick={this.handleClick}>Compute Alignment</Button>
               { showMatrix &&
-                <Matrix matrix={matrix} pointers={pointers} match={match} mismatch={mismatch} gap={gap} longS={S1.length >= S2.length ? S1 : S2} shortS={S1.length < S2.length ? S1 : S2}/>
+                <Matrix matrix={matrix} pointers={pointers} traceback={traceback} match={match} mismatch={mismatch} gap={gap} longS={S1.length >= S2.length ? S1 : S2} shortS={S1.length < S2.length ? S1 : S2} algorithm={algorithm}/>
               }
             </div>
           </div>

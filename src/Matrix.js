@@ -11,10 +11,11 @@ class Matrix extends React.Component {
         super(props);
         this.state = {
             matrix: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-            pointers: [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+            pointers: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+            algorithm: ''
         }
     }
-    renderRow = (row, rowIndex, char, pointers) => {
+    renderRow = (row, rowIndex, char, pointers, traceback) => {
       const { shortS, longS, matrix, match, mismatch, gap } = this.props;
       return (
         <Grid.Row>
@@ -33,7 +34,6 @@ class Matrix extends React.Component {
             // If this element is an integer, display arrows
             else {
                 var source;
-                console.log(pointers[rowIndex][index]);
                 var up, left, topleft = false;
                 // Identify all of this cell's pointers
                 for (var i = 0; i < pointers[rowIndex][index].length; i++) {
@@ -70,26 +70,48 @@ class Matrix extends React.Component {
                 else if (topleft) {
                     source = "arrows/TOPLEFT.png";
                 }
-                return (
-                  <Grid.Column>
-                    <ScoreSquare img={source} score={val} row={rowIndex} col={index} mismatch={mismatch} gap={gap} match={match} char1={ shortS.split('')[rowIndex] } char2={ longS.split('')[index]} matrix={matrix}/>
-                  </Grid.Column>
-                )
+
+                // Check if this cell is in the traceback
+                var in_traceback = false;
+                for (var i = 0; i < traceback.length; i++) {
+                    if (JSON.stringify([rowIndex, index]) == JSON.stringify(traceback[i])) {
+                        in_traceback = true;
+                        break;
+                    }
+                }
+
+                // If this cell is in the traceback, then highlight it
+                if (in_traceback) {
+                    var color = "red";
+                    return (
+                      <Grid.Column color={color}>
+                        <ScoreSquare img={source} score={val} row={rowIndex} col={index} mismatch={mismatch} gap={gap} match={match} char1={ shortS.split('')[rowIndex] } char2={ longS.split('')[index]} matrix={matrix}/>
+                      </Grid.Column>
+                    )
+                }
+                else {
+                    return (
+                      <Grid.Column>
+                        <ScoreSquare img={source} score={val} row={rowIndex} col={index} mismatch={mismatch} gap={gap} match={match} char1={ shortS.split('')[rowIndex] } char2={ longS.split('')[index]} matrix={matrix}/>
+                      </Grid.Column>
+                    )
+                }
             }
           })
         }
         </Grid.Row>
       );
     }
+
     render() {
-        const { matrix, pointers, shortS, longS } = this.props;
+        const { matrix, pointers, traceback, shortS, longS } = this.props;
         return (
           <Container>
-            <Grid columns={matrix[0].length + 1} celled>
-              {this.renderRow(longS.split(''), 0, ' ', pointers)}
+            <Grid columns={matrix[0].length + 1} padded>
+              {this.renderRow(longS.split(''), 0, ' ', pointers, traceback)}
               {matrix.map((row, index) => {
                   return (
-                    this.renderRow(row, index, shortS[index], pointers)
+                    this.renderRow(row, index, shortS[index], pointers, traceback)
                   )
               })}
             </Grid>
