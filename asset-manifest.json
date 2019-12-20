@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/SequenceAlignmentVisualizer/static/css/main.d266f8dc.chunk.css",
-    "main.js": "/SequenceAlignmentVisualizer/static/js/main.55ab375b.chunk.js",
-    "main.js.map": "/SequenceAlignmentVisualizer/static/js/main.55ab375b.chunk.js.map",
+    "main.css": "/SequenceAlignmentVisualizer/static/css/main.6b12957a.chunk.css",
+    "main.js": "/SequenceAlignmentVisualizer/static/js/main.0ee51941.chunk.js",
+    "main.js.map": "/SequenceAlignmentVisualizer/static/js/main.0ee51941.chunk.js.map",
     "runtime-main.js": "/SequenceAlignmentVisualizer/static/js/runtime-main.324aaac5.js",
     "runtime-main.js.map": "/SequenceAlignmentVisualizer/static/js/runtime-main.324aaac5.js.map",
     "static/js/2.9380b054.chunk.js": "/SequenceAlignmentVisualizer/static/js/2.9380b054.chunk.js",
     "static/js/2.9380b054.chunk.js.map": "/SequenceAlignmentVisualizer/static/js/2.9380b054.chunk.js.map",
     "index.html": "/SequenceAlignmentVisualizer/index.html",
-    "precache-manifest.d0a559c9c824d791af5b4bdd56d0c24c.js": "/SequenceAlignmentVisualizer/precache-manifest.d0a559c9c824d791af5b4bdd56d0c24c.js",
+    "precache-manifest.e75c589ed32c1263490a28a39b930515.js": "/SequenceAlignmentVisualizer/precache-manifest.e75c589ed32c1263490a28a39b930515.js",
     "service-worker.js": "/SequenceAlignmentVisualizer/service-worker.js",
-    "static/css/main.d266f8dc.chunk.css.map": "/SequenceAlignmentVisualizer/static/css/main.d266f8dc.chunk.css.map"
+    "static/css/main.6b12957a.chunk.css.map": "/SequenceAlignmentVisualizer/static/css/main.6b12957a.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.324aaac5.js",
     "static/js/2.9380b054.chunk.js",
-    "static/css/main.d266f8dc.chunk.css",
-    "static/js/main.55ab375b.chunk.js"
+    "static/css/main.6b12957a.chunk.css",
+    "static/js/main.0ee51941.chunk.js"
   ]
 }
