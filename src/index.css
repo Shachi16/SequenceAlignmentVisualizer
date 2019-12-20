@@ -41,5 +41,9 @@ label {
 }
 
 .scoreSquare:hover {
-  background-color: #B1E2D7; 
+  background-color: #B1E2D7;
+}
+
+.highlighted {
+  background-color: #E2D7B1;
 }

@@ -4,7 +4,7 @@ import { Image, Modal } from 'semantic-ui-react';
 class ScoreSquare extends React.Component {
 
   render() {
-    const { img, score, color, char1, char2, matrix, row, col, gap, mismatch, match } = this.props;
+    const { img, score, color, char1, char2, matrix, row, col, gap, mismatch, match, highlight } = this.props;
     var left = "N/A";
     var top = "N/A";
     var topleft = "N/A";
@@ -27,7 +27,7 @@ class ScoreSquare extends React.Component {
     }
     return (
       <Modal trigger={
-          <div class="scoreSquare">
+          <div class= { highlight ? "scoreSquare highlighted" : "scoreSquare"}>
               <Image src={img} size='small' />
               <p style={{position: 'absolute', top: '50%', left: '50%'}}> {score} </p>
           </div> }>

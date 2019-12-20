@@ -79,23 +79,11 @@ class Matrix extends React.Component {
                         break;
                     }
                 }
-
-                // If this cell is in the traceback, then highlight it
-                if (in_traceback) {
-                    var color = "red";
-                    return (
-                      <Grid.Column color={color}>
-                        <ScoreSquare img={source} score={val} row={rowIndex} col={index} mismatch={mismatch} gap={gap} match={match} char1={ shortS.split('')[rowIndex] } char2={ longS.split('')[index]} matrix={matrix}/>
-                      </Grid.Column>
-                    )
-                }
-                else {
-                    return (
-                      <Grid.Column>
-                        <ScoreSquare img={source} score={val} row={rowIndex} col={index} mismatch={mismatch} gap={gap} match={match} char1={ shortS.split('')[rowIndex] } char2={ longS.split('')[index]} matrix={matrix}/>
-                      </Grid.Column>
-                    )
-                }
+                return (
+                  <Grid.Column>
+                    <ScoreSquare img={source} score={val} row={rowIndex} col={index} mismatch={mismatch} gap={gap} match={match} char1={ shortS.split('')[rowIndex] } char2={ longS.split('')[index]} matrix={matrix} highlight={in_traceback}/>
+                  </Grid.Column>
+                )
             }
           })
         }
@@ -107,7 +95,7 @@ class Matrix extends React.Component {
         const { matrix, pointers, traceback, shortS, longS } = this.props;
         return (
           <Container>
-            <Grid columns={matrix[0].length + 1} padded>
+            <Grid columns={matrix[0].length + 1} celled>
               {this.renderRow(longS.split(''), 0, ' ', pointers, traceback)}
               {matrix.map((row, index) => {
                   return (
