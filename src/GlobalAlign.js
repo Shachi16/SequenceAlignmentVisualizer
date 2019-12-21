@@ -4,6 +4,10 @@ const TOPLEFT = [-1, -1]
 const ORIGIN = [0, 0]
 
 export function globalAlign(v, w, match, mismatch, gap) {
+    // v and w without initial '-'
+    var original_v = v.substring(1, v.length);
+    var original_w = w.substring(1, w.length);
+
   //Initialize variables
   var M = []
   var pointers = []
@@ -74,18 +78,19 @@ export function globalAlign(v, w, match, mismatch, gap) {
     }
   }
   var score = M[v.length - 1][w.length - 1];
-  var traceback_and_alignment = traceback_global(v,w, pointers);
+  var traceback_and_alignment = traceback_global(original_v, original_w, pointers);
   var traceback = traceback_and_alignment[0];
   var alignment = traceback_and_alignment[1];
   return [M, pointers, traceback, alignment, score]
 }
 
 function traceback_global(v, w, pointers) {
-    var i = v.length - 1;
-    var j = w.length - 1;
+    var i = v.length;
+    var j = w.length;
 
-    var new_v = v[i];
-    var new_w = w[j];
+    var new_v = "";
+    var new_w = "";
+
     var traceback = [];
     while (true) {
         traceback.push([i, j]);

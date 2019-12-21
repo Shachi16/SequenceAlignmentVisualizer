@@ -11,8 +11,9 @@ class Home extends React.Component {
           matrix: [[]],
           pointers: [[]],
           traceback: [],
-          S1: '',
-          S2: '',
+          alignment: [],
+          v: '',
+          w: '',
           match: 0,
           mismatch: 0,
           gap: 0,
@@ -25,25 +26,27 @@ class Home extends React.Component {
       const { algorithm } = this.state;
       var s1 = '-' + document.getElementById('input_s1').value;
       var s2 = '-' + document.getElementById('input_s2').value;
+      var v = s1.length <= s2.length ? s1 : s2;
+      var w = s1.length > s2.length ? s1 : s2;
       var match = parseInt(document.getElementById('input_match').value);
       var mismatch = parseInt(document.getElementById('input_mismatch').value);
       var gap = parseInt(document.getElementById('input_gap').value);
       var result;
       if (algorithm === 'global') {
-        result = globalAlign(s1, s2, match, mismatch, gap);
+        result = globalAlign(v, w, match, mismatch, gap);
       }
       else if (algorithm === 'fitting') {
-        result = fittingAlign(s1, s2, match, mismatch, gap);
+        result = fittingAlign(v, w, match, mismatch, gap);
       }
       else {
-        result = localAlign(s1, s2, match, mismatch, gap);
+        result = localAlign(v, w, match, mismatch, gap);
       }
       var M = result[0];
       var p = result[1];
       var traceback = result[2];
-      var alignment = result[3];
-      var score = result[4];
-      this.setState({matrix: M, pointers: p, traceback: traceback, showMatrix: true, S1: s1, S2: s2, match, mismatch, gap, algorithm: algorithm});
+      var alignment = result[3].split(/\n/);
+      var score = "Score: " + result[4];
+      this.setState({matrix: M, pointers: p, traceback: traceback, alignment: alignment, score: score, showMatrix: true, v: v, w: w, match, mismatch, gap, algorithm: algorithm});
     }
 
     handleChange = () => {
@@ -59,7 +62,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { matrix, pointers, traceback, S1, S2, showMatrix, match, mismatch, gap, algorithm } = this.state;
+        const { matrix, pointers, traceback, alignment, score, v, w, showMatrix, match, mismatch, gap, algorithm } = this.state;
         return (
           <div>
             <h1> Sequence Aligner </h1>
@@ -102,8 +105,12 @@ class Home extends React.Component {
             </form>
             <div class="display">
               <Button id="btn_compute" onClick={this.handleClick}>Compute Alignment</Button>
+              <div style={{margin: "0 auto", fontFamily: "Consolas", fontSize: 20}}>
+                <p>{alignment[0]}<br/>{alignment[1]}</p>
+                <p>{score}</p>
+              </div>
               { showMatrix &&
-                <Matrix matrix={matrix} pointers={pointers} traceback={traceback} match={match} mismatch={mismatch} gap={gap} longS={S1.length >= S2.length ? S1 : S2} shortS={S1.length < S2.length ? S1 : S2} algorithm={algorithm}/>
+                <Matrix matrix={matrix} pointers={pointers} traceback={traceback} match={match} mismatch={mismatch} gap={gap} longS={w} shortS={v} algorithm={algorithm}/>
               }
             </div>
           </div>

@@ -4,6 +4,10 @@ const TOPLEFT = [-1, -1]
 const ORIGIN = [0, 0]
 
 export function fittingAlign(v, w, match, mismatch, gap) {
+    // v and w without initial '-'
+    var original_v = v.substring(1, v.length);
+    var original_w = w.substring(1, w.length);
+
   //Initialize variables
   var M = []
   var pointers = []
@@ -83,18 +87,18 @@ export function fittingAlign(v, w, match, mismatch, gap) {
         }
     }
     var score = max_score
-  var traceback_and_alignment = traceback_fitting(v, w, M, init_j, pointers);
+  var traceback_and_alignment = traceback_fitting(original_v, original_w, M, init_j, pointers);
   var traceback = traceback_and_alignment[0];
   var alignment = traceback_and_alignment[1];
   return [M, pointers, traceback, alignment, score]
 }
 
 function traceback_fitting(v, w, M, init_j, pointers) {
-    var i = v.length - 1;
+    var i = v.length;
     var j = init_j;
 
-    var new_v = v[i];
-    var new_w = w[j];
+    var new_v = "";
+    var new_w = "";
     var traceback = [];
     while (true) {
         traceback.push([i, j]);
