@@ -32,7 +32,7 @@ export function localAlign(v, w, match, mismatch, gap) {
           max_val = temp;
           dir = [TOPLEFT];
         }
-        else if (temp == max_val) {
+        else if (temp === max_val) {
             dir.push(TOPLEFT);
         }
       }
@@ -43,7 +43,7 @@ export function localAlign(v, w, match, mismatch, gap) {
           max_val = temp;
           dir = [TOPLEFT];
         }
-        else if (temp == max_val) {
+        else if (temp === max_val) {
             dir.push(TOPLEFT);
         }
       }
@@ -54,7 +54,7 @@ export function localAlign(v, w, match, mismatch, gap) {
           max_val = temp;
           dir = [LEFT];
         }
-        else if (temp == max_val) {
+        else if (temp === max_val) {
             dir.push(LEFT);
         }
       }
@@ -65,7 +65,7 @@ export function localAlign(v, w, match, mismatch, gap) {
           max_val = temp;
           dir = [UP];
         }
-        else if (temp == max_val) {
+        else if (temp === max_val) {
             dir.push(UP);
         }
       }
@@ -106,21 +106,21 @@ function traceback_local(v, w, M, init_i, init_j, pointers) {
         var d = pointers[i][j][0];
         var di = d[0];
         var dj = d[1];
-        if (JSON.stringify(d) == JSON.stringify(LEFT)){
+        if (JSON.stringify(d) === JSON.stringify(LEFT)){
             new_v = '-' + new_v;
             new_w = w[j-1] + new_w;
         }
-        else if (JSON.stringify(d) == JSON.stringify(UP)) {
+        else if (JSON.stringify(d) === JSON.stringify(UP)) {
             new_v = v[i-1] + new_v;
             new_w = '-' + new_w;
         }
-        else if (JSON.stringify(d) == JSON.stringify(TOPLEFT)) {
+        else if (JSON.stringify(d) === JSON.stringify(TOPLEFT)) {
             new_v = v[i-1] + new_v;
             new_w = w[j-1] + new_w;
         }
         var i = i + di;
         var j = j + dj;
-        if (M[i][j] == 0) {
+        if (M[i][j] === 0) {
             break;
         }
     }

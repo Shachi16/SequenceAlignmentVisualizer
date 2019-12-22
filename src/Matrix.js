@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Container, Image, Modal, Header } from 'semantic-ui-react';
+import { Grid, Container } from 'semantic-ui-react';
 import ScoreSquare from './ScoreSquare';
 const UP = [-1,0]
 const LEFT = [0, -1]
@@ -37,13 +37,13 @@ class Matrix extends React.Component {
                 var up, left, topleft = false;
                 // Identify all of this cell's pointers
                 for (var i = 0; i < pointers[rowIndex][index].length; i++) {
-                    if (JSON.stringify(pointers[rowIndex][index][i]) == JSON.stringify(UP)) {
+                    if (JSON.stringify(pointers[rowIndex][index][i]) === JSON.stringify(UP)) {
                         up = true;
                     }
-                    else if (JSON.stringify(pointers[rowIndex][index][i]) == JSON.stringify(LEFT)) {
+                    else if (JSON.stringify(pointers[rowIndex][index][i]) === JSON.stringify(LEFT)) {
                         left = true;
                     }
-                    else if (JSON.stringify(pointers[rowIndex][index][i]) == JSON.stringify(TOPLEFT)) {
+                    else if (JSON.stringify(pointers[rowIndex][index][i]) === JSON.stringify(TOPLEFT)) {
                         topleft = true;
                     }
                 }
@@ -74,7 +74,7 @@ class Matrix extends React.Component {
                 // Check if this cell is in the traceback
                 var in_traceback = false;
                 for (var i = 0; i < traceback.length; i++) {
-                    if (JSON.stringify([rowIndex, index]) == JSON.stringify(traceback[i])) {
+                    if (JSON.stringify([rowIndex, index]) === JSON.stringify(traceback[i])) {
                         in_traceback = true;
                         break;
                     }

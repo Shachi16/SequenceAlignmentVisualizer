@@ -66,6 +66,7 @@ class Home extends React.Component {
         return (
           <div>
             <h1> Sequence Aligner </h1>
+            <p> This is meant to be a tool to help understand the global, fitting, and local alignment algorithms and their matrix constructions.</p>
             <form>
               <fieldset>
                 <legend>Select Alignment Algorithm</legend>
@@ -86,11 +87,11 @@ class Home extends React.Component {
                 <legend>Enter Sequences</legend>
                 <p>
                   <label for="input_s1">Sequence 1</label>
-                  <input type="text" id="input_s1"/>
+                  <input type="text" id="input_s1" maxLength="14"/>
                 </p>
                 <p>
                   <label for="input_s2">Sequence 2</label>
-                  <input type="text" id="input_s2"/>
+                  <input type="text" id="input_s2" maxLength="14"/>
                 </p>
               </fieldset>
               <fieldset>

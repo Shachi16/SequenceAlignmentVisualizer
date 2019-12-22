@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Image, Modal } from 'semantic-ui-react';
 
 class ScoreSquare extends React.Component {
 
   render() {
-    const { img, score, color, char1, char2, matrix, row, col, gap, mismatch, match, highlight } = this.props;
+    const { img, score, char1, char2, matrix, row, col, gap, mismatch, match, highlight } = this.props;
     var left = "N/A";
     var top = "N/A";
     var topleft = "N/A";
